@@ -1,0 +1,40 @@
+﻿@model List<BlobModel>
+
+    <h1>List Blobs</h1>
+    <hr />
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Url</th>
+                <th>Contenido</th>
+                <th>Imagen</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>
+                    <a href="@item.Url">@item.Url</a>
+                </td>
+                <td>@item.Container</td>
+                <td>
+                    <img src="@Url.Action("VerImagen", "AzureBlobs", new { containerName = item.Container, blobName = item.Nombre })"
+                         style="width:100px" />
+                </td>
+                <td>
+                    <a asp-controller="AzureBlobs"
+                        asp-action="DeleteBlob"
+                        asp-route-containerName="@item.Container"
+                        asp-route-blobname="@item.Nombre"
+                        class="btn btn-danger">
+                        Eliminar blob: @item.Nombre
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
