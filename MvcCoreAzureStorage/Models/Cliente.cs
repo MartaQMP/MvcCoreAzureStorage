@@ -26,7 +26,7 @@ namespace MvcCoreAzureStorage.Models
         /* CUANDO EL USUARIO ALMACENE UNA EMPRESA, NOSOTROS
          * ALMACENAMOS EL PARTITION KEY */
         private string _Empresa;
-        private string Empresa
+        public string Empresa
         {
             get { return this._Empresa; }
             set { 

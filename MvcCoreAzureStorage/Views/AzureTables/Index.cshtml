@@ -1,0 +1,55 @@
+﻿@model List<Cliente>
+
+
+<h1>Azure Storage Table</h1>
+<hr />
+<p style="text-align:center">
+    <a asp-action="Create" class="btn btn-outline-dark">Crear cliente</a>
+</p>
+<hr />
+<form method="post">
+    <label class="form-label">Introduce una empresa:</label>
+    <input type="text" name="empresa" class="form-control" />
+    <br />
+    <button class="btn btn-dark">Buscar clientes</button>
+</form>
+<hr />
+<table class="table table-striped" style="margin:auto; width:80%">
+    <thead>
+        <tr>
+            <th>IdCliente</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Salario</th>
+            <th>Empresa</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.IdCliente</td>
+            <td>@item.Nombre</td>
+            <td>@item.Edad</td>
+            <td>@item.Salario</td>
+            <td>@item.Empresa</td>
+            <td>
+                <a  asp-controller="AzureTables" 
+                    asp-action="Details" 
+                    asp-route-partitionKey="@item.PartitionKey" 
+                    asp-route-rowKey="@item.RowKey" 
+                    class="btn btn-outline-dark">
+                    Detalles
+                </a>
+                <a  asp-controller="AzureTables" 
+                    asp-action="Delete" 
+                    asp-route-partitionKey="@item.PartitionKey" 
+                    asp-route-rowKey="@item.RowKey" 
+                    class="btn btn-outline-danger">
+                    Eliminar
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
